@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://github.3dstreet.org/dist/aframe-street-component.js"></script>
+    <script src="https://github.3dstreet.org/src/json-utils.js"></script>
+    <script src="./lib/aframe-gaussian-splatting-component.min.js"></script>
+
+    <title>Street Component!</title>
+  </head>
+  <body>
+    <a-scene
+      notify
+      renderer="colorManagement: true; physicallyCorrectLights: true;"
+      inspector="url: https://3dstreet.app/dist/3dstreet-editor.js"
+      metadata
+      scene-title
+      reflection
+    >
+
+
+      <a-entity id="street-container" data-layer-name="3D Street Layers" data-layer-show-children>
+        <a-entity id="default-street" street streetmix-loader="streetmixStreetURL: https://streetmix.net/kfarr/3/" set-loader-from-hash></a-entity>
+      </a-entity>
+
+      <a-entity id="reference-layers" data-layer-name="Reference Layers" data-layer-show-children>
+          <a-entity gaussian_splatting="src: ./splats/gs_Test_stop_sign.splat; depthWrite: true; discardFilter: 0.1;" scale="0.77 0.77 0.77" rotation="0 44.6 0" position="1 1.5 -16" id="splat-stop-sign"></a-entity>
+          <a-entity gaussian_splatting="src: ./splats/gs_Bus_stop_shelter.splat; depthWrite: true; discardFilter: 0.1;" scale="1.75 1.75 1.75" rotation="0 78.7 0" position="2.62 1.616 -5" id="splat-bus-stop"></a-entity>
+        <a-entity gaussian_splatting="src: ./splats/gs_Palm_tree.cleaned.splat; depthWrite: true; discardFilter: 0.1;" scale="1.5 1.5 1.5" rotation="0 44.6 0" position="-14 2.935 -8.390" id="splat-palm-tree"></a-entity>
+        <a-entity gaussian_splatting="src: ./splats/gs_Prius.cleaned.splat; depthWrite: true; discardFilter: 0.1;" scale="1.25 1.25 1.25" rotation="3.3 42 -2" position="5.371 0.56 -2" id="splat-prius"></a-entity>
+      </a-entity>
+
+      <a-entity id="environment" data-layer-name="Environment" street-environment="preset: day;"></a-entity>
+  
+      <a-entity id="cameraRig" data-layer-name="Viewer" cursor-teleport="cameraRig: #cameraRig; cameraHead: #camera;" look-controls="reverseMouseDrag: true" wasd-controls="enabled: true">
+        <a-entity id="camera" camera="far: 1000" position="0 1.6 0"></a-entity>
+        <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #ffccff" teleport-controls="cameraRig: #cameraRig; button: trigger"></a-entity>
+        <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffccff" teleport-controls="cameraRig: #cameraRig; button: trigger"></a-entity>
+        <a-entity id="screenshot" class="no-pause" screentock visible="false"></a-entity>
+      </a-entity>
+
+
+    </a-scene>
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+
+  </body>
+</html>
