@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewSparkRenderer LOD Occlusion Bug</title>
+  <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@6a054e85953bbcc71854bcd64f9abde0897be649/dist/aframe-master.min.js"></script>
+  <script src="bundle.js"></script>
+  <style>
+    #info {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 14px;
+      z-index: 100;
+      max-width: 400px;
+    }
+    #info h3 { margin: 0 0 10px 0; }
+    #info p { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <h3>NewSparkRenderer LOD Occlusion Bug</h3>
+    <p>Red box and green plane should be occluded by splats when behind them.</p>
+    <p>Bug: Box and plane render on top of splat regardless of depth.</p>
+    <p>Settings: logarithmicDepthBuffer: true, lod: true</p>
+  </div>
+
+  <a-scene renderer="colorManagement: true; logarithmicDepthBuffer: true;">
+    <!-- Red box that should be occluded by splat -->
+    <a-box position="0.5 1 -2" color="red" height="2"></a-box>
+
+    <!-- Ground -->
+    <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#228B22"></a-plane>
+
+    <!-- Splat -->
+    <!-- <a-entity splat="src: ./1st-splatica-test-filtered.ply" position="-0.5 0 -2"></a-entity> -->
+    <a-entity splat="src: ./butterfly-ai.spz" scale="10 10 10"></a-entity>
+
+    <!-- Lighting -->
+    <a-light type="ambient" intensity="0.6"></a-light>
+    <a-light type="directional" position="5 10 5" intensity="1"></a-light>
+
+    <!-- Camera -->
+    <a-entity position="0 1.6 2">
+      <a-camera look-controls wasd-controls></a-camera>
+    </a-entity>
+
+    <!-- Sky -->
+    <!-- <a-sky color="#87CEEB"></a-sky> -->
+  </a-scene>
+</body>
+</html>

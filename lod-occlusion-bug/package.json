@@ -1,0 +1,16 @@
+{
+  "name": "lod-occlusion-bug",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "webpack serve",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@sparkjsdev/spark": "github:sparkjsdev/spark#splat-quick-lod"
+  },
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}
